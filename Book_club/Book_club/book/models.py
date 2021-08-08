@@ -9,10 +9,15 @@ class Book(models.Model):
         ('4', 'liked'),
         ('5', 'loved it'),
     )
+    GENRE_TYPES = (
+        ('fiction', 'Fiction'),
+        ('non-fiction', 'Non-fiction'),
+    )
+
     title = models.CharField(max_length=35)
     author = models.CharField(max_length=30)
-    audiobook = models.BooleanField(default=False)
-    length = models.CharField(max_length=10)
+    genre = models.CharField(max_length=11, choices=GENRE_TYPES, default="None")
+    length = models.CharField(max_length=15)
     emotional_value = models.TextField(max_length=255)
     review = models.TextField(max_length=1500)
     mark = models.CharField(max_length=1, choices=LIKES)
