@@ -1,4 +1,4 @@
-from Book_club.user_profile.models import UserProfile
+from book_club.user_profile.models import UserProfile
 
 
 def get_profile():
