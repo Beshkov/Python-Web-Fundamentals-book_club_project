@@ -1,5 +1,5 @@
 nav {
-    background: cadetblue;
+    background: lightslategray;
     height: 75px;
 }
 
@@ -11,7 +11,7 @@ nav ul li,
 nav ul li a {
     color: antiquewhite;
     text-decoration: orchid;
-    list-style: lower-greek;
+    list-style: none;
     font-size: 22px;
     padding: 6px;
     margin-top: 10px;
@@ -29,4 +29,8 @@ nav ul li.right a {
 
 body {
     background-color: #d48f77;
+}
+
+h1, h3, p {
+    text-align: center;
 }

@@ -10,6 +10,9 @@ def home(request):
     else:
         return render(request, 'home.html')
 
+def about(request):
+    return render(request, 'about.html')
+
 def log_in(request):
     pass
 

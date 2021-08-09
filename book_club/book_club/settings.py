@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'book_club.book',
     'book_club.user_profile',
     'book_club.book_event',
+
 ]
 
 MIDDLEWARE = [
