@@ -7,3 +7,11 @@ class BookEvents(models.Model):
     description = models.TextField(max_length=800)
     duration = models.DurationField()
     expired = models.BooleanField(default=False)
+
+
+class Like(models.Model):
+    event = models.ForeignKey(BookEvents, on_delete=models.CASCADE)
+
+
+class Dislike(models.Model):
+    event = models.ForeignKey(BookEvents, on_delete=models.CASCADE)

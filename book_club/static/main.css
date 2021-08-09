@@ -34,3 +34,30 @@ body {
 h1, h3, p {
     text-align: center;
 }
+
+.form {
+    /* space around an element's content inside of any defined borders. */
+    padding: 35px;
+    /* width of the box */
+    width: 15%;
+    margin: 5% auto 10% auto;
+}
+
+input[type=text],
+input[type=url],
+input[type=number],
+input[type=email],
+select,
+textarea {
+    width: 100%;
+    padding: 3px 15px;
+    margin: 3px 0;
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+button{
+    align-items: center;
+}
