@@ -7,7 +7,7 @@ from book_club.user_profile.forms import UserProfileForm
 def home(request):
     profile = get_profile()
     if profile:
-        pass
+        return render(request, 'home.html')
     else:
         return render(request, 'home.html')
 

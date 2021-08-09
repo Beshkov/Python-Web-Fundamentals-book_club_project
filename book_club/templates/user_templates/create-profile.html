@@ -3,7 +3,7 @@
 {% block content %}
     {% include 'common/nav_two.html' %}
     <div class="form">
-        <form method="post" action="{% url 'create profile' %}">
+        <form method="post" action="{% url 'create profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form }}
             <button>Create</button>
