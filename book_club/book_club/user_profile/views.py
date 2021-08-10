@@ -1,23 +1,32 @@
 from django.shortcuts import render, redirect
 
+from book_club.book.models import Book
 from book_club.core.profile_utils import get_profile
-from book_club.user_profile.forms import UserProfileForm
+from book_club.user_profile.forms import UserProfileForm, EditProfileForm
+from book_club.user_profile.models import UserProfile
 
 
 def home(request):
     profile = get_profile()
     if profile:
-        return render(request, 'home.html')
+
+        context = {
+            'books':Book.objects.all()
+        }
+
+        return render(request, 'home.html', context)
     else:
         return render(request, 'home.html')
 
 
-#TODO move about and log_in into a comman app.
+# TODO move about and log_in into a comman app.
 def about(request):
     return render(request, 'about.html')
 
+
 def log_in(request):
     pass
+
 
 def create_profile(request):
     if request.method == 'POST':
@@ -34,12 +43,34 @@ def create_profile(request):
 
     return render(request, 'user_templates/create-profile.html', context)
 
+
 def edit_profile(request, pk):
-    pass
+    user = UserProfile.objects.first()
+    if request.method == "POST":
+        form = EditProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('all events')
+    else:
+        form = EditProfileForm(instance=user)
 
-def view_profile(request, pk):
-    pass
+    context = {
+        'form': form,
+        'user': user,
+    }
 
-def delete_profile(request, pk):
-    pass
+    return render(request, 'user_templates/edit-profile.html', context)
 
+
+def view_profile(request):
+    user = UserProfile.objects.first()
+
+    context = {
+        'user': user
+    }
+
+    return render(request, 'user_templates/view-profile.html', context)
+
+
+def delete_user_profile(request, pk):
+    pass

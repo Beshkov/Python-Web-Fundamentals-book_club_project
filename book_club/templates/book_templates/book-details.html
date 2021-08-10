@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
 
-</body>
-</html>
+{% block content %}
+    {% include 'common/nav_two.html' %}
+    <div>
+        <div class="form">
+            <h1>Book Details</h1>
+            <div class="text">{{ book.title}}</div>
+            <div class="text">{{ book.author }}</div>
+            <div class="text">{{ book.length }}</div>
+            <div class="text">{{ book.review }}</div>
+            <div class="text">{{ book.emotional_value }}</div>
+            <div class="text">{{ book.mark }}</div>
+
+            <a class="button likes" href="{% url 'edit book' book.id %}">Edit Book</a>
+            <a class="button dislikes" href="{% url 'remove book' book.id %}">Remove Book</a>
+
+        </div>
+    </div>
+{% endblock %}

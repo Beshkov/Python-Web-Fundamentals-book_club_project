@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
 
-</body>
-</html>
+{% block content %}
+    {% include "common/nav_two.html" %}
+    <h1>User Profile:</h1>
+    <div class="form">
+        {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="">
+        {% else %}
+            <p>Please upload a picture from the edit button down bellow</p>
+        {% endif %}
+        <h4>{{ user.username }}</h4>
+        <h4>Books that user have read</h4>
+        {% for book in books %}
+            <div>{{ book.title }} from {{ book.author }}</div>
+            <a href="{% url 'view book' book.id %}"></a>
+            <hr>
+        {% endfor %}
+
+        <a class="button likes" methods="post" href="{% url 'edit profile' user.id %}">Edit</a>
+        <a class="button dislikes" methods="post" href="{% url 'delete profile' use.id %}">Delete</a>
+
+    </div>
+{% endblock %}

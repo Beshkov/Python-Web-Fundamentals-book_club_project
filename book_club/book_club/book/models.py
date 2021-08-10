@@ -2,12 +2,12 @@ from django.db import models
 
 
 class Book(models.Model):
-    LIKES = (
-        ('1', 'dislike'),
-        ('2', 'did not like'),
-        ('3', 'neutral'),
-        ('4', 'liked'),
-        ('5', 'loved it'),
+    MARKS = (
+        ('dislike', 'dislike'),
+        ('did not like', 'did not like'),
+        ('neutral', 'neutral'),
+        ('liked', 'liked'),
+        ('loved it', 'loved it'),
     )
     GENRE_TYPES = (
         ('fiction', 'Fiction'),
@@ -20,5 +20,5 @@ class Book(models.Model):
     length = models.CharField(max_length=15)
     emotional_value = models.TextField(max_length=255)
     review = models.TextField(max_length=1500)
-    mark = models.CharField(max_length=1, choices=LIKES)
+    mark = models.CharField(max_length=12, choices=MARKS)
     private = models.BooleanField(default=False)
