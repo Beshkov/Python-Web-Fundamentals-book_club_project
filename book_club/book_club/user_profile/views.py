@@ -19,7 +19,7 @@ def home(request):
         return render(request, 'home.html')
 
 
-# TODO move about and log_in into a comman app.
+# TODO move about and log_in into a common app.
 def about(request):
     return render(request, 'about.html')
 
@@ -45,7 +45,7 @@ def create_profile(request):
 
 
 def edit_profile(request, pk):
-    user = UserProfile.objects.first()
+    user = UserProfile.objects.get(pk=pk)
     if request.method == "POST":
         form = EditProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
@@ -64,9 +64,11 @@ def edit_profile(request, pk):
 
 def view_profile(request):
     user = UserProfile.objects.first()
+    books = Book.objects.all()
 
     context = {
-        'user': user
+        'user': user,
+        'books': books,
     }
 
     return render(request, 'user_templates/view-profile.html', context)
