@@ -1,0 +1,32 @@
+nav {
+    background: cadetblue;
+    height: 75px;
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul li,
+nav ul li a {
+    color: antiquewhite;
+    text-decoration: orchid;
+    list-style: lower-greek;
+    font-size: 22px;
+    padding: 6px;
+    margin-top: 10px;
+}
+
+nav ul li.right {
+    position: absolute;
+    right: 30px;
+}
+
+nav ul li.right a {
+    font-size: 22px;
+    margin: 5px auto;
+}
+
+body {
+    background-color: #d48f77;
+}

@@ -1,0 +1,22 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    {% include 'common/nav_two.html' %}
+    <div>
+        <h1>Event Details</h1>
+        <div class="form">
+            <img class="zub" src="{{ book_ev.book_picture }}" alt="">
+            <div class="text">{{ book_ev.title }}</div>
+            <div class="text">{{ book_ev.description }}</div>
+            <div class="datetime">{{ book_ev.duration }}</div>
+            <a class="button likes" href="{% url 'like event' book_ev.id %}">Likes: {{ book_ev.likes_count }}</a>
+            <a class="button dislikes" href="{% url 'dislike event' book_ev.id %}">Dislikes: {{ book_ev.dislikes_count }}</a>
+            {% if book_ev.expired %}
+                <p>This event has expired. You can still do it if you like.</p>
+            {% else %}
+                <p>This event is still active.</p>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

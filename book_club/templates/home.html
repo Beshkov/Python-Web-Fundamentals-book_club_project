@@ -1,0 +1,19 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    {% include "common/nav_one.html" %}
+    <h1>Home Page</h1>
+    {% for book in books %}
+        <hr>
+        <p>{{ book.title }} from {{ book.author }}</p>
+        <p>{{ book.length }}</p>
+        <p>{{ book.review }}</p>
+        <p>{{ book.emotional_value }}</p>
+        <a href="{% url 'view book' book.id %}">
+        <button style="position: center">View Details</button>
+        </a>
+        <hr>
+    {% endfor %}
+{% endblock %}
+
+
