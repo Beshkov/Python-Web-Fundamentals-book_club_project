@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'book_club.account',
     'book_club.book',
     'book_club.user_profile',
     'book_club.book_event',
@@ -142,4 +143,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_URL = reverse_lazy('sign in')
+AUTH_USER_MODEL = 'account.BookClubUser'
+
