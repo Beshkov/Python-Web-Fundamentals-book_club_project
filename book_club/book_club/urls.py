@@ -9,5 +9,4 @@ urlpatterns = [
     path('', include('book_club.user_profile.urls')),
     path('events/', include('book_club.book_event.urls')),
     path('books/', include('book_club.book.urls')),
-    path('auth/', include('book_club.book_club_auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
