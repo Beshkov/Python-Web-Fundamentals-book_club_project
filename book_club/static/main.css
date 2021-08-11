@@ -110,10 +110,8 @@ input[type=back],
     margin-top: auto;
     padding: 5px 10px;
     border-radius: 2px;
-    text-align: center;
+    text-align: right;
 }
-
-
 
 img {
     padding: revert;
