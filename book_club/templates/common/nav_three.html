@@ -1,0 +1,32 @@
+<nav>
+    <ul>
+        <li class="text">Book Club</li>
+
+        <li class="right">
+            <a methods="post" class="nav-link" href="{% url 'home' %}">Home</a>
+            <a methods="post" class="nav-link" href="{% url 'about' %}">About</a>
+
+            {% if requst.user.is_authenticated %}
+                <p>Hello, {{ request.user }}</p>
+
+                <a methods="post" class="nav-link" href="{% url 'all events' %}">Events</a>
+
+                <a methods="post" class="nav-link" href="{% url 'add book' %}">ADD BOOK</a>
+
+
+                <a methods="post" class="nav-link" href="{% url 'view profile' %}">User</a>
+
+
+                <a methods="post" class="nav-link" href="{% url 'sign out' %}">About</a>
+
+            {% else %}
+
+                <a methods="post" class="nav-link" href="{% url 'sign in' %}">Sign in</a>
+                <a methods="post" class="nav-link" href="{% url 'sign up' %}">Sign up</a>
+
+            {% endif %}
+
+        </li>
+
+    </ul>
+</nav>
