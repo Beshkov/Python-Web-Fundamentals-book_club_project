@@ -18,7 +18,7 @@
             {% endif %}
             {% if not club_event.user %}
                 <a methods="post" href="{% url 'edit club event' book_ev.id %}">edit</a>
-                <a methods="post" href="#">delete TODO</a>
+                <a methods="post" href="{% url  'delete book event' book_ev.id %}">delete</a>
             {% endif %}
 
         </div>

@@ -75,23 +75,42 @@ def edit_event(request, pk):
     return render(request, 'book-events/edit-book-event.html', context)
 
 
+@login_required
 def delete_event(request, pk):
-    pass
+    club_event = BookEvent.objects.get(pk=pk)
+    if request.method == "POST":
+        club_event.delete()
+        return redirect('all events')
+    else:
+        context = {
+            'club_event': club_event,
+        }
+        return render(request, 'book-events/delete-book-event.html', context)
 
 
 def like_event(request, pk):
     event_to_like = BookEvent.objects.get(pk=pk)
-    like = Like(
-        event=event_to_like,
-    )
-    like.save()
+    user_liked_it = event_to_like.like_set.filter(user_id=request.user.id).first()
+    if user_liked_it:
+        user_liked_it.delete()
+    else:
+        like = Like(
+            event=event_to_like,
+            user=request.user,
+        )
+        like.save()
     return redirect('view book event', event_to_like.id)
 
 
 def dislike_event(request, pk):
     event_to_dislike = BookEvent.objects.get(pk=pk)
-    dislike = Dislike(
-        event=event_to_dislike,
-    )
-    dislike.save()
+    user_disliked_it = event_to_dislike.dislike_set.filter(user_id=request.user.id).first()
+    if user_disliked_it:
+        user_disliked_it.delete()
+    else:
+        dislike = Dislike(
+            event=event_to_dislike,
+            user=request.user,
+        )
+        dislike.save()
     return redirect('view book event', event_to_dislike.id)

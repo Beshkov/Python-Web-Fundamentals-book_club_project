@@ -18,7 +18,15 @@ class BookEvent(models.Model):
 
 class Like(models.Model):
     event = models.ForeignKey(BookEvent, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+    )
 
 
 class Dislike(models.Model):
     event = models.ForeignKey(BookEvent, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+    )

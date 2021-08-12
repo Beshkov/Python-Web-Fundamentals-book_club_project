@@ -24,10 +24,6 @@ class BookClubUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Profile(models.Model):
-    # username = models.CharField(
-    #     max_length=25,
-    #     unique=True,
-    # ) #TODO implement later on
 
     profile_image = models.ImageField(
         upload_to='user_profile_picture',

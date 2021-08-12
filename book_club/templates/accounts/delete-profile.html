@@ -1,11 +1,10 @@
 {% extends 'common/base.html' %}
 
-
 {% block content %}
     {% include 'common/nav_two.html' %}
     <div class="form">
-        <form method="post" action="{% url 'delete book event' club_event.id %}" >
-            <h3>Delete this event: are you sure?</h3>
+    <h3>We will miss you!</h3>
+        <form method="post" action="{% url 'delete profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form }}
            <button class="btn btn-primary mt-2" type="submit">Delete</button>

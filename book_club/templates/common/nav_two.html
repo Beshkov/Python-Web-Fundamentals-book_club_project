@@ -13,7 +13,7 @@
                 <a class="nav-link" href="{% url 'sign out' %}">Sign out</a>
             {% else %}
                 <a methods="post" class="nav-link" href="{% url 'sign in' %}">Sign in</a>
-                <a methods="post" class="nav-link" href="#">Sign up</a>
+                <a methods="post" class="nav-link" href="{% url 'sign up' %}">Sign up</a>
             {% endif %}
 
 

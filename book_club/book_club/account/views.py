@@ -1,10 +1,11 @@
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.views.generic import DeleteView
 
-from book_club.account.forms import SignInForm, ProfileForm
+from book_club.account.forms import SignInForm, ProfileForm, CreateProfileForm
 
-from book_club.account.models import Profile
+from book_club.account.models import Profile, BookClubUser
 from book_club.book.models import Book
 
 
@@ -26,7 +27,20 @@ def sign_in(request):
 
 
 def sign_up(request):
-    pass
+    if request.method == "POST":
+        form = CreateProfileForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = CreateProfileForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'accounts/sign_up.html', context)
 
 
 def sign_out(request):
@@ -45,7 +59,7 @@ def profile_details(request):
         )
         if form.is_valid():
             form.save()
-            return redirect('profile details')
+            return redirect('view profile')
     else:
         form = ProfileForm(instance=profile)
 
@@ -58,3 +72,21 @@ def profile_details(request):
     }
 
     return render(request, 'accounts/user_profile.html', context)
+
+@login_required
+def delete_profile(request):
+    profile = Profile.objects.get(pk=request.user.id)
+    user = profile.user
+    user_form = CreateProfileForm(instance=user)
+
+    context = {
+        'user_form': user_form,
+        'profile': profile
+    }
+    if request.method == 'GET':
+
+        return render(request, 'accounts/delete-profile.html', context)
+    
+    user.delete()
+    profile.delete()
+    return redirect('home')

@@ -1,26 +1,45 @@
 {% extends 'common/base.html' %}
-
+{% load static %}
 {% block content %}
     {% include 'common/nav_two.html' %}
-        <h3>You profile</h3>
-         <div class="w-50 m-auto">
-            <form action="{% url 'view profile' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form }}
-                <button class="btn btn-success">Update</button>
-            </form>
-        </div>
+    <h3>
+        Hello, You:
+        <br>
+        {% if profile.profile_image %}
+            <img src="{{ profile.profile_image.url }}" alt="" style="width: 75px">
+        {% endif %}
+    </h3>
+    <div class="w-50 m-auto" style="padding-left: 35%">
+        <form action="{% url 'view profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <button class="btn btn-success">Update</button>
+        </form>
+        <a style='padding-left: 90%' class="button delete" methods="post" href="{% url 'delete profile' %}">Delete Profile</a>
+    </div>
 
-        {% for book in user_books %}
+    {% for book in user_books %}
 
-            <hr>
-            <p>{{ book.title }} from {{ book.author }}</p>
-            <p>{{ book.length }}</p>
-            <p>{{ book.review }}</p>
-            <p>{{ book.emotional_value }}</p>
-            <a href="{% url 'view book' book.id %}">
-                <button style="position: center">View Details</button>
-            </a>
-            <hr>
-        {% endfor %}
+        <hr>
+        <p>{{ book.title }} from {{ book.author }}</p>
+        <p>{{ book.length }}</p>
+        <p>{{ book.review }}</p>
+        <p>{{ book.emotional_value }}</p>
+        <a href="{% url 'view book' book.id %}">
+            {% if not book.favorite %}
+                <h3>
+                    <img style="width: 3%" src="{% static 'images/183334.png' %}" alt="">
+                    <br>
+                    <button style="position: center">View Details</button>
+                </h3>
+            {% else %}
+                <h3>
+                    <img style="width: 3%" src="{% static 'images/85566.png' %}" alt="">
+                    <br>
+                    <button style="position: center">View Details</button>
+                </h3>
+            {% endif %}
+        </a>
+        <hr>
+    {% endfor %}
 {% endblock %}
