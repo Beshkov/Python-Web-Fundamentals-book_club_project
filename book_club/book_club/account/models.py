@@ -36,4 +36,16 @@ class Profile(models.Model):
         primary_key=True,
     )
 
+
+    
+    # def delete(self, *args, **kwargs):
+    #
+    #     self.profile_image.delete()
+    #     self.user.delete()
+    #
+    #     super().delete(*args, **kwargs)  # Call the "real" save() method.
+
+
+
+
 from .signals import *

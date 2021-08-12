@@ -1,4 +1,8 @@
+import os
+from os.path import join
+
 from django import forms
+from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.exceptions import ValidationError
@@ -48,6 +52,19 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('profile_image',)
+
+
+# class EditProfileForm(ProfileForm):
+#     def save(self, commit=True):
+#         db_user = Profile.objects.get(pk=self.instance.id)
+#         if commit:
+#             image_path = join(settings.MEDIA_ROOT, str(db_user.profile_image))
+#             os.remove(image_path)
+#         return super().save(commit)
+#
+#     class Meta:
+#         model = Profile
+#         fields = '__all__'
 
 
 class CreateProfileForm(UserCreationForm):

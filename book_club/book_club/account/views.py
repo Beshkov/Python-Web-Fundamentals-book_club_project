@@ -1,3 +1,7 @@
+import os
+from os.path import join
+
+from django.conf import settings
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -50,8 +54,10 @@ def sign_out(request):
 
 @login_required
 def profile_details(request):
+
     profile = Profile.objects.get(pk=request.user.id)
     if request.method == 'POST':
+
         form = ProfileForm(
             request.POST,
             request.FILES,
@@ -59,6 +65,7 @@ def profile_details(request):
         )
         if form.is_valid():
             form.save()
+
             return redirect('view profile')
     else:
         form = ProfileForm(instance=profile)
@@ -86,7 +93,8 @@ def delete_profile(request):
     if request.method == 'GET':
 
         return render(request, 'accounts/delete-profile.html', context)
-    
+
     user.delete()
     profile.delete()
+
     return redirect('home')
