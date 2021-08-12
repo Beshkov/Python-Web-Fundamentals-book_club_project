@@ -1,23 +1,25 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from book_club.book.forms import CreateBookForm, EditBookForm, DeleteBookForm
 from book_club.book.models import Book
-from book_club.user_profile.models import UserProfile
 
+UserProfile = None
 
+@login_required
 def add_book(request):
-    user = UserProfile.objects.first()
     if request.method == 'POST':
         form = CreateBookForm(request.POST)
         if form.is_valid():
-            form.save()
+            book = form.save(commit=False)
+            book.user = request.user
+            book.save()
             return redirect('home')
     else:
         form = CreateBookForm()
 
     context = {
         'form': form,
-        'user': user
     }
 
     return render(request, 'book_templates/add-book-to-collection.html', context)

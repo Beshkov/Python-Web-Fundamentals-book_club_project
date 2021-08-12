@@ -16,6 +16,10 @@
             {% else %}
                 <p>This event is still active.</p>
             {% endif %}
+            {% if not club_event.user %}
+                <a methods="post" href="{% url 'edit club event' book_ev.id %}">edit</a>
+                <a methods="post" href="#">delete TODO</a>
+            {% endif %}
 
         </div>
     </div>

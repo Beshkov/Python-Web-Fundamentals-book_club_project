@@ -1,4 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.db import models
+
+UserModel = get_user_model()
 
 
 class BookEvent(models.Model):
@@ -7,6 +10,10 @@ class BookEvent(models.Model):
     description = models.TextField(max_length=800)
     duration = models.DurationField()
     expired = models.BooleanField(default=False)
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+    )
 
 
 class Like(models.Model):
