@@ -6,6 +6,7 @@ from book_club.book.models import Book
 class BooksForms(forms.ModelForm):
     class Meta:
         model = Book
+        exclude = ('user',)
         fields = '__all__'
 
 

@@ -6,6 +6,7 @@
 
 {% block content %}
 {% include "common/nav_two.html" %}
+<a href="{% url 'create book event' %}"><h3>Make Book Event</h3></a>
  <h1>Ongoing  Events:</h1>
     {% for even in events %}
         <div class="form">

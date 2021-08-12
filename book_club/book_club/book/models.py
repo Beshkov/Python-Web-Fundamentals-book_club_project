@@ -1,5 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
+
+UserModel = get_user_model()
 
 class Book(models.Model):
     MARKS = (
@@ -21,4 +24,8 @@ class Book(models.Model):
     emotional_value = models.TextField(max_length=255)
     review = models.TextField(max_length=1500)
     mark = models.CharField(max_length=12, choices=MARKS)
-    private = models.BooleanField(default=False)
+    favorite = models.BooleanField(default=False)
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+    )

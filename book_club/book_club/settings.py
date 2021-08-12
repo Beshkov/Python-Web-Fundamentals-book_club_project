@@ -40,8 +40,8 @@ INSTALLED_APPS = [
 
     'book_club.account',
     'book_club.book',
-    'book_club.user_profile',
     'book_club.book_event',
+    'book_club.common_app',
 
 ]
 
