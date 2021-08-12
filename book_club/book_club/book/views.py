@@ -28,8 +28,11 @@ def add_book(request):
 def view_book(request, pk):
     book = Book.objects.get(pk=pk)
 
+    book_owner = book.user == request.user
+
     context = {
-        'book': book
+        'book': book,
+        'book_owner': book_owner,
     }
 
     return render(request, 'book_templates/book-details.html', context)

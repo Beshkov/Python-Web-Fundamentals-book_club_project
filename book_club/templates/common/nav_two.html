@@ -9,7 +9,7 @@
             {% if request.user.is_authenticated %}
                 <a methods="post" class="nav-link" href="{% url 'all events' %}">Events</a>
                 <a methods="post" class="nav-link" href="{% url 'add book' %}">Add Book</a>
-                <a methods="post" class="nav-link" href="#">{{ request.user }}</a>
+                <a methods="post" class="nav-link" href="{% url 'view profile' %}">{{ request.user }}</a>
                 <a class="nav-link" href="{% url 'sign out' %}">Sign out</a>
             {% else %}
                 <a methods="post" class="nav-link" href="{% url 'sign in' %}">Sign in</a>

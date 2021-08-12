@@ -21,6 +21,7 @@ from django.core.exceptions import ValidationError
 #
 #         if not self.user:
 #             raise ValidationError('Email and/or password incorrect')
+from book_club.account.models import Profile
 
 
 class SignInForm(forms.Form):
@@ -42,3 +43,9 @@ class SignInForm(forms.Form):
 
     def save(self):
         return self.user
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('profile_image',)
