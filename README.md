@@ -28,3 +28,14 @@
 * (1) added MEDIA_ROOT
 
 Notes: I need to refactor the user profile and make it authenticate. 
+
+### Changes with the commit at 12.08.2021
+
+#### I had to back up the project and upload reupload the project. Still learing git I guess. /that is kind of irrelevant for the project/
+
+* Changes to user_profiles:
+* (1) deleted the old profiles and created  new updated user profiles.
+* (2) user profile now is registered by email and password and is extended by profile_image / TODO: implement user profile / 
+* (3) implemented new forms, models, urls, signals, auth views, 
+
+* Changes to books and book events 
