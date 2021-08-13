@@ -39,3 +39,8 @@ Notes: I need to refactor the user profile and make it authenticate.
 * (3) implemented new forms, models, urls, signals, auth views, 
 
 * Changes to books and book events 
+
+* Changes to the views:
+* (1) full crud to all of the users 
+* (2) added functionality to remove images when uploading new one or when user is removed from view.
+* (3) added PostgresQL

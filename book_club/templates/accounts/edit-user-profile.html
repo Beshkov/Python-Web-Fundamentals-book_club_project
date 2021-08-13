@@ -1,0 +1,11 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+{% include 'common/nav_two.html' %}
+        <div class="w-50 m-auto" style="padding-left: 35%">
+        <form action="{% url 'view profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <button class="btn btn-success">Update</button>
+        </form>
+{% endblock %}

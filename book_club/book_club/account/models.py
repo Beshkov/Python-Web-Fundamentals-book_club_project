@@ -36,8 +36,9 @@ class Profile(models.Model):
         primary_key=True,
     )
 
+    def __str__(self):
+        return f'{self.user}'
 
-    
     # def delete(self, *args, **kwargs):
     #
     #     self.profile_image.delete()

@@ -54,17 +54,24 @@ class ProfileForm(forms.ModelForm):
         fields = ('profile_image',)
 
 
-# class EditProfileForm(ProfileForm):
-#     def save(self, commit=True):
-#         db_user = Profile.objects.get(pk=self.instance.id)
-#         if commit:
-#             image_path = join(settings.MEDIA_ROOT, str(db_user.profile_image))
-#             os.remove(image_path)
-#         return super().save(commit)
-#
-#     class Meta:
-#         model = Profile
-#         fields = '__all__'
+class EditProfileForm(ProfileForm):
+    def save(self, commit=True):
+        db_user = Profile.objects.get(pk=self.instance.id)
+        if commit:
+            image_path = join(settings.MEDIA_ROOT, str(db_user.profile_image))
+            os.remove(image_path)
+        return super().save(commit)
+
+    class Meta:
+        model = Profile
+        fields = '__all__'
+        widgets = {
+            'type': forms.TextInput(
+                attrs={
+                    'readonly': 'readonly',
+                }
+            )
+        }
 
 
 class CreateProfileForm(UserCreationForm):
