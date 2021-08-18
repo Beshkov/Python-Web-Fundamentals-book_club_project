@@ -1,8 +1,12 @@
 from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
+
 
 from book_club.book_event.forms import BookEventForm, EditBookEventForm
 from book_club.book_event.models import BookEvent, Like, Dislike
+
+
 
 
 def view_event(request, pk):
@@ -56,11 +60,17 @@ def book_event_details(request, pk):
 
     return render(request, 'book-events/view-book-event.html', context)
 
-
+@login_required
 def edit_event(request, pk):
+    """
+    Edit view that check if the request method is -> POST and
+    if the obj.instance creator is the same user from the request.
+    if all is valid then
+    """
     club_event = BookEvent.objects.get(pk=pk)
-    if request.method == 'POST':
-        form = EditBookEventForm(request.POST, instance=club_event)
+    if request.method == 'POST' and club_event.user == request.user:
+
+        form = EditBookEventForm(request.POST, instance=club_event,)
         if form.is_valid():
             form.save()
             return redirect('view book event', pk)
@@ -78,7 +88,7 @@ def edit_event(request, pk):
 @login_required
 def delete_event(request, pk):
     club_event = BookEvent.objects.get(pk=pk)
-    if request.method == "POST":
+    if request.method == "POST" and club_event.user == request.user:
         club_event.delete()
         return redirect('all events')
     else:

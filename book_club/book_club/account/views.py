@@ -15,6 +15,8 @@ from book_club.account.models import Profile, BookClubUser
 from book_club.book.models import Book
 from book_club.book_event.models import BookEvent
 
+# PasswordChangeForm #TODO implement password
+
 
 def sign_in(request):
     if request.method == "POST":

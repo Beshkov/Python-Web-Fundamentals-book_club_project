@@ -12,6 +12,7 @@ class BookClubUser(AbstractBaseUser, PermissionsMixin):
 
     is_staff = models.BooleanField(
         default=False,
+
     )
 
     date_joined = models.DateTimeField(

@@ -33,6 +33,7 @@ class SignInForm(forms.Form):
     )
     password = forms.CharField(
         widget=forms.PasswordInput(),
+
     )
 
     def clean_password(self):

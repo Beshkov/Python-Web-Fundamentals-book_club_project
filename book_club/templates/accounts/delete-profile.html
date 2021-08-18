@@ -3,7 +3,7 @@
 {% block content %}
     {% include 'common/nav_two.html' %}
     <div class="form">
-    <h3>We will miss you!</h3>
+    <h3>We will miss you go!</h3>
         <form method="post" action="{% url 'delete profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form }}

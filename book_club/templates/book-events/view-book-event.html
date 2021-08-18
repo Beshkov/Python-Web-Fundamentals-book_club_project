@@ -1,5 +1,9 @@
 {% extends 'common/base.html' %}
 
+{% block head_title %}
+View Event
+{% endblock %}
+
 {% block content %}
     {% include 'common/nav_two.html' %}
     <div>
@@ -16,7 +20,7 @@
             {% else %}
                 <p>This event is still active.</p>
             {% endif %}
-            {% if not club_event.user %}
+            {% if club_event.user %}
                 <a methods="post" href="{% url 'edit club event' book_ev.id %}">edit</a>
                 <a methods="post" href="{% url  'delete book event' book_ev.id %}">delete</a>
             {% endif %}
