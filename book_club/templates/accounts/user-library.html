@@ -1,0 +1,44 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block head_title %}
+    Book library
+{% endblock %}
+
+
+{% block content %}
+{% include 'common/nav_two.html' %}
+    {% if user.profile_image %}
+        <img src="{{ user.profile_image.url }}" alt="" style="width: 120px; padding-left: 47%; padding-top: 5%; position: center">
+    {% endif %}
+
+
+        {% for book in books %}
+
+        <hr>
+        <p>{{ book.title }} from {{ book.author }}</p>
+
+            {% if book.audiobook %}
+                <p> {{ book.length }} minutes</p>
+            {% else %}
+                <p> {{ book.length }} pages</p>
+            {% endif %}
+        <p><strong>Review:</strong>{{ book.review }}</p>
+        <p><strong>This book emotional value:</strong>{{ book.emotional_value }}</p>
+        <a href="{% url 'view book' book.id %}">
+            {% if not book.favorite %}
+                <h3>
+                    <img style="width: 3%" src="{% static 'images/183334.png' %}" alt="">
+                    <br>
+                    <button style="position: center">View Details</button>
+                </h3>
+            {% else %}
+                <h3>
+                    <img style="width: 3%" src="{% static 'images/85566.png' %}" alt="">
+                    <br>
+                    <button style="position: center">View Details</button>
+                </h3>
+            {% endif %}
+        </a>
+        <hr>
+    {% endfor %}
+{% endblock %}

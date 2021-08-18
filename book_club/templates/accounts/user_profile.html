@@ -18,28 +18,5 @@
         <a style='padding-left: 90%' class="button delete" methods="post" href="{% url 'delete profile' %}">Delete Profile</a>
     </div>
 
-    {% for book in user_books %}
 
-        <hr>
-        <p>{{ book.title }} from {{ book.author }}</p>
-        <p>{{ book.length }}</p>
-        <p>{{ book.review }}</p>
-        <p>{{ book.emotional_value }}</p>
-        <a href="{% url 'view book' book.id %}">
-            {% if not book.favorite %}
-                <h3>
-                    <img style="width: 3%" src="{% static 'images/183334.png' %}" alt="">
-                    <br>
-                    <button style="position: center">View Details</button>
-                </h3>
-            {% else %}
-                <h3>
-                    <img style="width: 3%" src="{% static 'images/85566.png' %}" alt="">
-                    <br>
-                    <button style="position: center">View Details</button>
-                </h3>
-            {% endif %}
-        </a>
-        <hr>
-    {% endfor %}
 {% endblock %}

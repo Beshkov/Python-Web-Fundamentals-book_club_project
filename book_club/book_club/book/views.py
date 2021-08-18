@@ -13,6 +13,8 @@ def add_book(request):
         if form.is_valid():
             book = form.save(commit=False)
             book.user = request.user
+            book.title = book.title.title()
+            book.author = book.author.title()
             book.save()
             return redirect('home')
     else:

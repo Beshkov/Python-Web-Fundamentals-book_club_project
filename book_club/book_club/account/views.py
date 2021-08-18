@@ -1,6 +1,6 @@
 import os
 from os.path import join
-
+# from django.contrib.auth.forms import PasswordChangeForm
 from django.conf import settings
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
@@ -102,18 +102,26 @@ def profile_details(request):
             request.FILES,
             instance=profile,
         )
+        try:
+            old_image_path = profile.profile_image.path
+        except ValueError:
+            pass
+
         if form.is_valid():
+            form.save(commit=False)
+            try:
+                os.remove(old_image_path)
+            except FileNotFoundError and UnboundLocalError:
+                pass
             form.save()
 
             return redirect('view profile')
     else:
         form = ProfileForm(instance=profile)
 
-    user_books = Book.objects.filter(user_id=request.user.id)
 
     context = {
         'form': form,
-        'user_books': user_books,
         'profile': profile,
     }
 
@@ -137,3 +145,15 @@ def delete_profile(request):
     profile.delete()
 
     return redirect('home')
+
+
+def user_library(request):
+    profile = Profile.objects.get(pk=request.user.id)
+    books = Book.objects.filter(user_id=request.user.id)
+
+    context = {
+        'user': profile,
+        'books': books,
+    }
+
+    return render(request, 'accounts/user-library.html', context)
