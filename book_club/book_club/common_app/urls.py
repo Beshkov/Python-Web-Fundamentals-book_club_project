@@ -1,8 +1,8 @@
 from django.urls import path
 
-from book_club.common_app.views import home, about
+from book_club.common_app.views import HomePageView, AboutPageView
 
 urlpatterns = (
-    path('', home, name='home'),
-    path('about/', about, name='about'),
+    path('', HomePageView.as_view(), name='home'),
+    path('about/', AboutPageView.as_view(), name='about'),
 )

@@ -4,35 +4,44 @@ from os.path import join
 from django.conf import settings
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import DeleteView, UpdateView, FormView
 
 from book_club.account.forms import SignInForm, ProfileForm, CreateProfileForm, EditProfileForm
 
 from book_club.account.models import Profile, BookClubUser
 from book_club.book.models import Book
-from book_club.book_event.models import BookEvent
+
 
 # PasswordChangeForm #TODO implement password
 
 
-def sign_in(request):
-    if request.method == "POST":
-        form = SignInForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('home')
-    else:
-        form = SignInForm()
+# def sign_in(request):
+#     if request.method == "POST":
+#         form = SignInForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             login(request, user)
+#             return redirect('home')
+#     else:
+#         form = SignInForm()
+#
+#     context = {
+#         'form': form,
+#     }
+#
+#     return render(request, 'accounts/sign_in.html', context)
 
-    context = {
-        'form': form,
-    }
 
-    return render(request, 'accounts/sign_in.html', context)
+class SignInView(LoginView):
+    """
+    if you gonna remove this view remove the LOGIN_REDIRECT_URL = 'home' at line 145 in settings.py the whole reason we
+    place that there is so we can override the LOGIN_REDIRECT_URL = 'account/profile in global_settings.py file  """
+    template_name = 'accounts/sign_in.html'
+    authentication_form = SignInForm
+    success_url = reverse_lazy('home')
 
 
 def sign_up(request):
@@ -55,6 +64,7 @@ def sign_up(request):
 def sign_out(request):
     logout(request)
     return redirect('home')
+
 
 #
 # class ProfileDetailsView(LoginRequiredMixin, FormView):
@@ -93,7 +103,6 @@ def sign_out(request):
 
 @login_required
 def profile_details(request):
-
     profile = Profile.objects.get(pk=request.user.id)
     if request.method == 'POST':
 
@@ -105,20 +114,25 @@ def profile_details(request):
         try:
             old_image_path = profile.profile_image.path
         except ValueError:
+            old_image_path = False
             pass
 
         if form.is_valid():
             form.save(commit=False)
-            try:
+
+            # try:
+            #     os.remove(old_image_path)
+            # except FileNotFoundError and UnboundLocalError :
+            #     pass
+
+            if old_image_path:
                 os.remove(old_image_path)
-            except FileNotFoundError and UnboundLocalError:
-                pass
+
             form.save()
 
             return redirect('view profile')
     else:
         form = ProfileForm(instance=profile)
-
 
     context = {
         'form': form,
@@ -126,6 +140,7 @@ def profile_details(request):
     }
 
     return render(request, 'accounts/user_profile.html', context)
+
 
 @login_required
 def delete_profile(request):
@@ -138,7 +153,6 @@ def delete_profile(request):
         'profile': profile
     }
     if request.method == 'GET':
-
         return render(request, 'accounts/delete-profile.html', context)
 
     user.delete()
