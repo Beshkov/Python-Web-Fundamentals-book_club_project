@@ -44,3 +44,16 @@ Notes: I need to refactor the user profile and make it authenticate.
 * (1) full crud to all of the users 
 * (2) added functionality to remove images when uploading new one or when user is removed from view.
 * (3) added PostgresQL
+
+
+
+Revision 1: 
+    (1) cleaned the user profile view  moved the books of the user to separate view/page 
+    (2) added the option to replace the user profile image using Error Handling 
+
+Revision 2:
+    (1) added Some Class Based Views and added tests.
+
+Revision 3: 
+    (1) added more tests.
+    

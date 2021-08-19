@@ -15,7 +15,7 @@ from book_club.account.models import Profile, BookClubUser
 from book_club.book.models import Book
 
 
-# PasswordChangeForm #TODO implement password
+# PasswordChangeForm #TODO implement password change
 
 
 # def sign_in(request):

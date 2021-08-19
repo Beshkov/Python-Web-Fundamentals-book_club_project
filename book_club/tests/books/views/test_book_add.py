@@ -5,7 +5,7 @@ from book_club.account.admin import UserModel
 from book_club.book.models import Book
 
 
-class BookDetails(TestCase):
+class BookAddTest(TestCase):
 
     def setUp(self):
         self.client = Client()
@@ -19,7 +19,8 @@ class BookDetails(TestCase):
                 'title': 'test',
                 'author': 'test_auth',
                 'genre': 'fiction',
-                'length': '888 pages',
+                'length': 888,
+                'audiobook': False,
                 'emotional_value': 'neutral',
                 'review': 'test',
                 'mark': 'neutral',
@@ -29,10 +30,11 @@ class BookDetails(TestCase):
             follow=True
         )
 
-        self.assertEqual(Book.objects.first().title, 'test')
-        self.assertEqual(Book.objects.first().author, 'test_auth')
+        self.assertEqual(Book.objects.first().title, 'Test')
+        self.assertEqual(Book.objects.first().author, 'Test_Auth')
         self.assertEqual(Book.objects.first().genre, 'fiction')
-        self.assertEqual(Book.objects.first().length, '888 pages')
+        self.assertEqual(Book.objects.first().length, 888)
+        self.assertEqual(Book.objects.first().audiobook, False)
         self.assertEqual(Book.objects.first().emotional_value, 'neutral')
         self.assertEqual(Book.objects.first().review, 'test')
         self.assertEqual(Book.objects.first().mark, 'neutral')
