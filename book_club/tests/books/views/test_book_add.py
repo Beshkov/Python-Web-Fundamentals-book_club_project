@@ -41,14 +41,14 @@ class BookAddTest(TestCase):
         self.assertEqual(Book.objects.first().favorite, False)
         self.assertEqual(Book.objects.first().user, self.user)
 
-    def test_add_book_ifUserLoggedIn_method_get_should_return_(self):
+    def test_add_book_ifUserLoggedIn_method_get_should_return_to_page(self):
         self.client.force_login(self.user)
 
         response = self.client.get(reverse('add book'))
 
         self.assertEqual(200, response.status_code)
 
-    def test_add_book_ifUserLoggedOut_method_get_should_return_(self):
+    def test_add_book_ifUserLoggedOut_method_get_should_return_redirect(self):
 
         response = self.client.get(reverse('add book'))
 

@@ -124,7 +124,11 @@ def profile_details(request):
             #     os.remove(old_image_path)
             # except FileNotFoundError and UnboundLocalError :
             #     pass
-
+            """
+            If user profile pictures are removed from the 'media' folder then a file not found error will occur.
+            This fixable with Try/ Expect FileNotFoundError block, however because I need to add a pass 
+            or copy the code bellow leading to spaghetti code I will use it as last resort  
+            """
             if old_image_path:
                 os.remove(old_image_path)
 

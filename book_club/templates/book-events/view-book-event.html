@@ -20,7 +20,7 @@ View Event
             {% else %}
                 <p>This event is still active.</p>
             {% endif %}
-            {% if club_event.user %}
+            {% if is_maker %}
                 <a methods="post" href="{% url 'edit club event' book_ev.id %}">edit</a>
                 <a methods="post" href="{% url  'delete book event' book_ev.id %}">delete</a>
             {% endif %}

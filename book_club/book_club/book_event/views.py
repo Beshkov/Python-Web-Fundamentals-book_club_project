@@ -13,8 +13,11 @@ def view_event(request, pk):
     book_ev.likes_count = book_ev.like_set.count()
     book_ev.dislikes_count = book_ev.dislike_set.count()
 
+    is_maker = book_ev.user == request.user
+
     context = {
         'book_ev': book_ev,
+        'is_maker': is_maker,
     }
 
     return render(request, 'book-events/view-book-event.html', context)
@@ -47,17 +50,6 @@ def create_event(request):
     return render(request, 'book-events/create-book-event.html', context)
 
 
-def book_event_details(request, pk):
-    book_event = BookEvent.objects.get(pk=pk)
-
-    is_owner = book_event.user == request.user
-
-    context = {
-        'book_event': book_event,
-        'is owner': is_owner,
-    }
-
-    return render(request, 'book-events/view-book-event.html', context)
 
 @login_required
 def edit_event(request, pk):
