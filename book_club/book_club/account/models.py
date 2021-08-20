@@ -3,11 +3,13 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
 from book_club.account.managers import BookClubUserManager
+from .custom_validator import validate_len_of_email
 
 
 class BookClubUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         unique=True,
+        validators=(validate_len_of_email,)
     )
 
     is_staff = models.BooleanField(

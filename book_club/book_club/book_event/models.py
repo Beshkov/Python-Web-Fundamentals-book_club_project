@@ -1,4 +1,4 @@
-from django.utils import timezone
+from django.utils import timezone as tz
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -15,7 +15,9 @@ class BookEvent(models.Model):
         UserModel,
         on_delete=models.CASCADE,
     )
-    date_of_creation = models.DateField(default=timezone.now())
+    date_of_creation = models.DateField(
+        auto_now_add=True
+    )
 
 
 class Like(models.Model):
