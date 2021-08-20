@@ -82,4 +82,4 @@ class EditProfileForm(ProfileForm):
 class CreateProfileForm(UserCreationForm):
     class Meta:
         model = BookClubUser
-        fields = ['email']
+        fields = ('email',)

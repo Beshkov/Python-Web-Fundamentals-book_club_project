@@ -1,8 +1,8 @@
 from django.urls import path
-from book_club.account.views import SignInView, sign_up, sign_out, profile_details, delete_profile, user_library
+from book_club.account.views import SignUpView, SignInView, sign_out, profile_details, delete_profile, user_library
 
 urlpatterns = (
-    path('sign-up/', sign_up, name='sign up'),
+    path('sign-up/', SignUpView.as_view(), name='sign up'),
     path('sign-in/', SignInView.as_view(), name='sign in'),
     path('sign-out/', sign_out, name='sign out'),
     path('user-profile', profile_details, name='view profile'),

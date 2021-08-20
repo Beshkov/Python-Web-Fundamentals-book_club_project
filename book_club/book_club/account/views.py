@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
 from book_club.account.forms import SignInForm, ProfileForm, CreateProfileForm, EditProfileForm
 
@@ -15,7 +16,6 @@ from book_club.account.models import Profile, BookClubUser
 from book_club.book.models import Book
 
 
-# PasswordChangeForm #TODO implement password change
 
 
 # def sign_in(request):
@@ -44,21 +44,35 @@ class SignInView(LoginView):
     success_url = reverse_lazy('home')
 
 
-def sign_up(request):
-    if request.method == "POST":
-        form = CreateProfileForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('home')
-    else:
-        form = CreateProfileForm()
+class SignUpView(CreateView):
+    form_class = CreateProfileForm
+    template_name = 'accounts/sign_up.html'
+    success_url = reverse_lazy('home')
 
-    context = {
-        'form': form,
-    }
+    def form_valid(self, form):
+        result = super().form_valid(form)
 
-    return render(request, 'accounts/sign_up.html', context)
+        login(self.request, self.object)
+
+        return result
+
+
+
+# def sign_up(request):
+#     if request.method == "POST":
+#         form = CreateProfileForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             login(request, user)
+#             return redirect('home')
+#     else:
+#         form = CreateProfileForm()
+#
+#     context = {
+#         'form': form,
+#     }
+#
+#     return render(request, 'accounts/sign_up.html', context)
 
 
 def sign_out(request):
