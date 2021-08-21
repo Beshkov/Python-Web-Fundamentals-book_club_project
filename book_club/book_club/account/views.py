@@ -134,17 +134,19 @@ def profile_details(request):
         if form.is_valid():
             form.save(commit=False)
 
-            # try:
-            #     os.remove(old_image_path)
-            # except FileNotFoundError and UnboundLocalError :
-            #     pass
-            """
-            If user profile pictures are removed from the 'media' folder then a file not found error will occur.
-            This fixable with Try/ Expect FileNotFoundError block, however because I need to add a pass 
-            or copy the code bellow leading to spaghetti code I will use it as last resort  
-            """
-            if old_image_path:
+            try:
                 os.remove(old_image_path)
+            except FileNotFoundError:
+                pass
+            except UnboundLocalError:
+                pass
+            except TypeError:
+                pass
+            """
+            instead of pass it should do something But wasn't able to come to anything on the spot.   
+            """
+            # if old_image_path:
+            #     os.remove(old_image_path)
 
             form.save()
 
